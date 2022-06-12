@@ -1,0 +1,2 @@
+# gawrgura
+Gk ada
