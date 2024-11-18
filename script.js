@@ -7,14 +7,14 @@ document.getElementById('downloadForm').addEventListener('submit', function(e) {
     let resultDiv = document.getElementById('result');
     resultDiv.innerHTML = 'Memproses...';
 
-    // Ganti URL API di bawah dengan URL API pihak ketiga yang mendukung TikTok downloader
-    const apiUrl = `https://api.tiktokdownloader.io/download?url=${encodeURIComponent(videoUrl)}&format=${format}`;
+    // Ganti URL API di bawah dengan TikWM API
+    const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(videoUrl)}?hd=1`;
 
     fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
-            resultDiv.innerHTML = `<a href="${data.downloadUrl}" target="_blank">Klik di sini untuk mengunduh video</a>`;
+        if (data.data && data.data.play) {
+            resultDiv.innerHTML = `<a href="${data.data.play}" target="_blank">Klik di sini untuk mengunduh video</a>`;
         } else {
             resultDiv.innerHTML = 'Terjadi kesalahan. Coba lagi.';
         }
@@ -23,3 +23,4 @@ document.getElementById('downloadForm').addEventListener('submit', function(e) {
         resultDiv.innerHTML = 'Terjadi kesalahan. Coba lagi.';
     });
 });
+
