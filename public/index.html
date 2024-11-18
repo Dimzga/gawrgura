@@ -1,19 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTok Video Downloader</title>
-    <link rel="stylesheet" href="/styles/style.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Downloader TikTok Sederhana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #1d8cf8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #1678c2;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .link {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #1d8cf8;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>TikTok Video Downloader</h1>
-        <input type="text" id="tiktok-url" placeholder="Paste TikTok URL here" />
-        <button onclick="downloadVideo()">Download Video</button>
-        <div id="result"></div>
-    </div>
 
-    <script src="/scripts/app.js"></script>
+<div class="container">
+    <h1>Download Video TikTok</h1>
+    <input type="text" id="tiktok-url" placeholder="Masukkan URL TikTok">
+    <button onclick="downloadVideo()">Download</button>
+    <div class="error" id="error-message"></div>
+</div>
+
+<script>
+    function downloadVideo() {
+        const url = document.getElementById('tiktok-url').value;
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.innerHTML = '';
+
+        if (!url) {
+            errorMessage.innerHTML = 'URL TikTok tidak boleh kosong.';
+            return;
+        }
+
+        // Validasi URL TikTok
+        const regex = /^(https:\/\/(?:www\.)?tiktok\.com\/.*)$/;
+        if (!regex.test(url)) {
+            errorMessage.innerHTML = 'URL tidak valid. Harap masukkan URL TikTok yang benar.';
+            return;
+        }
+
+        // Mengarahkan ke server untuk mendownload
+        window.location.href = `/download?url=${encodeURIComponent(url)}`;
+    }
+</script>
+
 </body>
 </html>
